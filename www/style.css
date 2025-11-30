@@ -1,0 +1,40 @@
+    body {
+        font-family: Arial, sans-serif;
+        height: 200vh;
+        padding: 40px;
+        background-color: #EEE5E9;
+    }
+
+    h1 {
+        color: #000000;
+        text-align: center;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+
+    p {
+        color: #000000;
+        line-height: 1.6;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #scroll-wrapper {
+        margin-top: 50vh;
+        }
+
+    .scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+      margin: 80vh 0; 
+    }
+
+    .scroll.current {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll.current h1,
+    .scroll.current p {
+      font-weight: bold;
+    }
