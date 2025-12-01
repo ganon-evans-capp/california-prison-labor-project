@@ -17,4 +17,6 @@ Real meaning of disparities - think of transfer costs, etc
 
 Put in terms of time: find visualization along another dimension - find profit, compare to a large company
 
-Put California in national context - number of prisoners, revenue raised, 
+Put California in national context - number of prisoners, revenue raised,
+
+Color Scheme: 000000, CF5C36, EEE5E9, 7C7C7C, EFC88B
