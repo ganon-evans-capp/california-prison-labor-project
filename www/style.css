@@ -10,6 +10,14 @@
         font-size: 80px;
         font-family: Georgia, serif;
     }
+
+    h2 {
+        color: #000000;
+        text-align: center;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        font-size: 60px;
+        font-family: Georgia, serif;
+    }
     
 
     p {
@@ -36,8 +44,7 @@
       transform: translateY(0);
     }
 
-    .scroll.current h1,
-    .scroll.current p {
+    .scroll.current h1 {
       font-weight: bold;
     }
 
@@ -46,4 +53,28 @@
         height: 400px;   
         display: block; 
         margin: auto
+    }
+
+    .fullscreen-photo {
+        height: 200vh; 
+        background-image: url("images/fire_photo.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin: 0;
+    }
+
+    .intro_text {
+        margin-bottom: 500px;
+        color: #FFFFFF;
+        -webkit-text-stroke: 0.5px black;
+        text-align: center;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        font-size: 40px;
+        font-family: Georgia, serif;
+    }
+
+    a { 
+      color: inherit; 
     }
