@@ -20,7 +20,7 @@
     }
     
 
-    p {
+    p, li {
         font-family: Verdana, sans-serif;
         color: #000000;
         line-height: 1.6;
