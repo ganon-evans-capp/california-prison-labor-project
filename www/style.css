@@ -101,3 +101,7 @@
         flex: 1;           
         max-width: 45%;
     }
+
+    svg text {
+         user-select: none;
+    }

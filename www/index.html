@@ -56,7 +56,7 @@
         <div id="second-graph" class="scroll">         
         <script>
           const x = d3.scaleLinear()
-            .domain([0, 50])
+            .domain([0, 40])
             .range([0, 600]);
 
 
@@ -73,7 +73,7 @@
           .select("#second-graph")
           .append("svg")
           .attr("width", 600)
-          .attr("height", 300)
+          .attr("height", 350)
           .attr("viewBox", "0 0 600 300");
 
 
@@ -82,18 +82,23 @@
 
           width_calc = x(industry["wage"])
 
-          let new_bar = guess_graph
+          let industry_bar = guess_graph
             .append("rect")
             .attr("x", 0)
-            .attr("y", i*40)
+            .attr("y", 30 + i*40)
             .attr("width", width_calc)
             .attr("height", 30)
             .attr("fill", industry["color"]);
 
-          let new_text = guess_graph
+            if (industry["industry"] === "Prison Industry Wages") {
+                industry_bar.attr("id", "prison-bar");
+                }
+
+          let industry_text = guess_graph
             .append("text")
-            .attr("x", 0)
-            .attr("y", 20 + i*40)
+            .attr("x", -175)
+            .attr("y", 50 + i*40)
+            .attr("font-family", "Georgia, serif")
             .attr("font-size", "10px")
             .attr("text-anchor", "left")
             .attr("pointer-events", "none")
@@ -101,51 +106,27 @@
 
           i += 1
         }
-          
-          /* 
-          
-                      <svg
-            version="2"
-            width="600"
-            height="300"
-            viewBox="0 0 600 300"
-            xmlns="http://www.w3.org/2000/svg"
-            >
-            <rect id="rect0" y="0" width="5" height="30" />
-            <text id="text0" y="15" style="fill: black; font-size: 12px"></text>
-            <rect id="rect1" y="0" width="5" height="30" />
-            <text id="text1" y="15" style="fill: black; font-size: 12px"></text>
-            <rect id="rect2" y="0" width="5" height="30" />
-            <text id="text2" y="15" style="fill: black; font-size: 12px"></text>
-            <rect id="rect3" y="0" width="5" height="30" />
-            <text id="text3" y="15" style="fill: black; font-size: 12px"></text>
-            <rect id="rect4" y="0" width="5" height="30" />
-            <text id="text4" y="15" style="fill: black; font-size: 12px"></text>
-            <rect id="rect5" y="0" width="5" height="30" />
-            <text id="text5" y="15" style="fill: black; font-size: 12px"></text>
-            </svg>   
 
-          for (let i = 0; i < industries.length; i++) {
-            let rect = document.getElementById(`rect${i}`);
-            let text = document.getElementById(`text${i}`);
+        const axis = d3.axisBottom(x)
+            .ticks(5)
+            .tickSize(6)
+            .tickPadding(8);
 
-            let current_industry = industries[i]
+        guess_graph.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0,270)")
+            .call(axis);
 
-            let width_assign = (current_industry["wage"]/50)*600
-
-            text.textContent = current_industry["industry"]
-
-            text.setAttribute("y", 20 + i*40)
-
-            rect.setAttribute("width", width_assign)
-
-            rect.setAttribute("y", i*40)
-
-            rect.setAttribute("fill", current_industry["color"])
-          }*/
+        guess_graph.append("text")
+            .attr("x", 300)
+            .attr("y", 20)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "18px")
+            .attr("font-family", "Georgia, serif")
+            .text("California Industry Wage Comparison ($ per hour)");
 
         //drag mechanic
-        let dragRect = document.getElementById("rect5");
+        let dragRect = document.getElementById("prison-bar");
         let isDragging = false;
 
         dragRect.style.cursor = "ew-resize";
@@ -232,18 +213,15 @@
         <div id="split_section" class="scroll">
             <p id="left_text" class="body_text"><a href="https://news.uchicago.edu/story/us-prison-labor-programs-violate-fundamental-human-rights-new-report-finds">800,000 inmates</a>
             across the United States are involved in some sort of prison labor initiative. The pay across states lines is similarly poor, with
-            4 states not even offering any sort of compenstation.</p>
+            4 states not even offering any sort of compenstation. Working for one hour as an inmate in the
+            37 states and in a federal prison that offer pay would earn $13.47, which is less than California's
+            minimum wage of $16.90 for just one hour of labor.</p>
 
             <svg id="tall_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="marks" width="1200" height="2400" viewBox="0 0 438 870"><rect width="438" height="870" fill="#EEE5E9"/><g fill="none" stroke-miterlimit="10" transform="translate(101,6)"><g class="mark-group role-frame root" role="graphics-object" aria-roledescription="group mark container"><g transform="translate(0,0)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z"/><g><g class="mark-group role-scope concat_0_group" role="graphics-object" aria-roledescription="group mark container"><g transform="translate(0,0)"><path class="background" aria-hidden="true" d="M0.5,0.5h300v760h-300Z" stroke="#ddd"/><g><g class="mark-group role-axis" aria-hidden="true"><g transform="translate(0.5,760.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-grid" pointer-events="none"><line transform="translate(0,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(30,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(60,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(90,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(120,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(150,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(180,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(210,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(240,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(270,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(300,0)" x2="0" y2="-760" stroke="#ddd" stroke-width="1" opacity="1"/></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="X-axis titled 'Hourly Wage in State-Owned Correctional Industries' for a linear scale with values from 0.0 to 1.0"><g transform="translate(0.5,760.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(0,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(30,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(60,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(90,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(120,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(150,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(180,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(210,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(240,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(270,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(300,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="start" transform="translate(0,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.0</text><text text-anchor="middle" transform="translate(30,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.1</text><text text-anchor="middle" transform="translate(60,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.2</text><text text-anchor="middle" transform="translate(90,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.3</text><text text-anchor="middle" transform="translate(120,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.4</text><text text-anchor="middle" transform="translate(150,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.5</text><text text-anchor="middle" transform="translate(180,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.6</text><text text-anchor="middle" transform="translate(210,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.7</text><text text-anchor="middle" transform="translate(240,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.8</text><text text-anchor="middle" transform="translate(270,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">0.9</text><text text-anchor="end" transform="translate(300,15)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">1.0</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="300" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(150,30)" font-family="Georgia" font-size="11px" font-weight="bold" fill="#000" opacity="1">Hourly Wage in State-Owned Correctional Industries</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="Y-axis titled 'State' for a discrete scale with 38 values: Wisconsin, Colorado, Iowa, Washington, Utah, ending with Louisiana"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(0,10)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,30)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,50)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,70)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,90)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,110)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,130)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,150)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,170)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,190)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,210)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,230)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,250)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,270)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,290)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,310)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,330)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,350)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,370)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,390)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,410)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,430)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,450)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,470)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,490)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,510)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,530)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,550)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,570)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,590)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,610)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,630)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,650)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,670)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,690)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,710)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,730)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,750)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(-7,12.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Wisconsin</text><text text-anchor="end" transform="translate(-7,32.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Colorado</text><text text-anchor="end" transform="translate(-7,52.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Iowa</text><text text-anchor="end" transform="translate(-7,72.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Washington</text><text text-anchor="end" transform="translate(-7,92.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Utah</text><text text-anchor="end" transform="translate(-7,112.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Virginia</text><text text-anchor="end" transform="translate(-7,132.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Hawaii</text><text text-anchor="end" transform="translate(-7,152.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Maine</text><text text-anchor="end" transform="translate(-7,172.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Minnesota</text><text text-anchor="end" transform="translate(-7,192.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Wyoming</text><text text-anchor="end" transform="translate(-7,212.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">North Dakota</text><text text-anchor="end" transform="translate(-7,232.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Massachusetts</text><text text-anchor="end" transform="translate(-7,252.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Montana</text><text text-anchor="end" transform="translate(-7,272.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Nebraska</text><text text-anchor="end" transform="translate(-7,292.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">California</text><text text-anchor="end" transform="translate(-7,312.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Nevada</text><text text-anchor="end" transform="translate(-7,332.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Connecticut</text><text text-anchor="end" transform="translate(-7,352.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Indiana</text><text text-anchor="end" transform="translate(-7,372.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Missouri</text><text text-anchor="end" transform="translate(-7,392.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">New Mexico</text><text text-anchor="end" transform="translate(-7,412.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Alabama</text><text text-anchor="end" transform="translate(-7,432.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Delaware</text><text text-anchor="end" transform="translate(-7,452.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Kansas</text><text text-anchor="end" transform="translate(-7,472.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Vermont</text><text text-anchor="end" transform="translate(-7,492.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">West Virginia</text><text text-anchor="end" transform="translate(-7,512.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Federal</text><text text-anchor="end" transform="translate(-7,532.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Arizona</text><text text-anchor="end" transform="translate(-7,552.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Ohio</text><text text-anchor="end" transform="translate(-7,572.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Florida</text><text text-anchor="end" transform="translate(-7,592.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Mississippi</text><text text-anchor="end" transform="translate(-7,612.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Oklahoma</text><text text-anchor="end" transform="translate(-7,632.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Pennsylvania</text><text text-anchor="end" transform="translate(-7,652.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Rhode Island</text><text text-anchor="end" transform="translate(-7,672.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Maryland</text><text text-anchor="end" transform="translate(-7,692.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">new Jersey</text><text text-anchor="end" transform="translate(-7,712.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">New York</text><text text-anchor="end" transform="translate(-7,732.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">New Hampshire</text><text text-anchor="end" transform="translate(-7,752.5)" font-family="Georgia" font-size="10px" fill="#000" opacity="1">Louisiana</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="0" y2="760" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(-83.001953125,380) rotate(-90) translate(0,-2)" font-family="Georgia" font-size="11px" font-weight="bold" fill="#000" opacity="1">State</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-rect role-mark concat_0_marks" role="graphics-object" aria-roledescription="rect mark container"><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.23; State: Federal" role="graphics-symbol" aria-roledescription="bar" d="M0,501h69v18h-69Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.25; State: Alabama" role="graphics-symbol" aria-roledescription="bar" d="M0,401h75v18h-75Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.23; State: Arizona" role="graphics-symbol" aria-roledescription="bar" d="M0,521h69v18h-69Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.35; State: California" role="graphics-symbol" aria-roledescription="bar" d="M0,281h105v18h-105Z" fill="#FE7300"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.86; State: Colorado" role="graphics-symbol" aria-roledescription="bar" d="M0,21h258v18h-258Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.3; State: Connecticut" role="graphics-symbol" aria-roledescription="bar" d="M0,321h90v18h-90Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.25; State: Delaware" role="graphics-symbol" aria-roledescription="bar" d="M0,421h75v18h-75Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.2; State: Florida" role="graphics-symbol" aria-roledescription="bar" d="M0,561h60v18h-60Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.5; State: Hawaii" role="graphics-symbol" aria-roledescription="bar" d="M0,121h150v18h-150Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.3; State: Indiana" role="graphics-symbol" aria-roledescription="bar" d="M0,341h90v18h-90Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.7; State: Iowa" role="graphics-symbol" aria-roledescription="bar" d="M0,41h210v18h-210Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.25; State: Kansas" role="graphics-symbol" aria-roledescription="bar" d="M0,441h75v18h-75Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.02; State: Louisiana" role="graphics-symbol" aria-roledescription="bar" d="M0,741h6v18h-6Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.5; State: Maine" role="graphics-symbol" aria-roledescription="bar" d="M0,141h150v18h-150Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.17; State: Maryland" role="graphics-symbol" aria-roledescription="bar" d="M0,661h51.00000000000001v18h-51.00000000000001Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.4; State: Massachusetts" role="graphics-symbol" aria-roledescription="bar" d="M0,221h120v18h-120Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.5; State: Minnesota" role="graphics-symbol" aria-roledescription="bar" d="M0,161h150v18h-150Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.2; State: Mississippi" role="graphics-symbol" aria-roledescription="bar" d="M0,581h60v18h-60Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.3; State: Missouri" role="graphics-symbol" aria-roledescription="bar" d="M0,361h90v18h-90Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.4; State: Montana" role="graphics-symbol" aria-roledescription="bar" d="M0,241h120v18h-120Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.38; State: Nebraska" role="graphics-symbol" aria-roledescription="bar" d="M0,261h114v18h-114Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.35; State: Nevada" role="graphics-symbol" aria-roledescription="bar" d="M0,301h105v18h-105Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.125; State: New Hampshire" role="graphics-symbol" aria-roledescription="bar" d="M0,721h37.5v18h-37.5Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.1625; State: new Jersey" role="graphics-symbol" aria-roledescription="bar" d="M0,681h48.75v18h-48.75Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.3; State: New Mexico" role="graphics-symbol" aria-roledescription="bar" d="M0,381h90v18h-90Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.16; State: New York" role="graphics-symbol" aria-roledescription="bar" d="M0,701h48v18h-48Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.45; State: North Dakota" role="graphics-symbol" aria-roledescription="bar" d="M0,201h135v18h-135Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.23; State: Ohio" role="graphics-symbol" aria-roledescription="bar" d="M0,541h69v18h-69Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.2; State: Oklahoma" role="graphics-symbol" aria-roledescription="bar" d="M0,601h60v18h-60Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.19; State: Pennsylvania" role="graphics-symbol" aria-roledescription="bar" d="M0,621h57v18h-57Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.1875; State: Rhode Island" role="graphics-symbol" aria-roledescription="bar" d="M0,641h56.25v18h-56.25Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.6; State: Utah" role="graphics-symbol" aria-roledescription="bar" d="M0,81h180v18h-180Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.25; State: Vermont" role="graphics-symbol" aria-roledescription="bar" d="M0,461h75v18h-75Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.55; State: Virginia" role="graphics-symbol" aria-roledescription="bar" d="M0,101h165v18h-165Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.7; State: Washington" role="graphics-symbol" aria-roledescription="bar" d="M0,61h210v18h-210Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.25; State: West Virginia" role="graphics-symbol" aria-roledescription="bar" d="M0,481h75v18h-75Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.97; State: Wisconsin" role="graphics-symbol" aria-roledescription="bar" d="M0,1h291v18h-291Z" fill="#929287"/><path aria-label="Hourly Wage in State-Owned Correctional Industries: 0.5; State: Wyoming" role="graphics-symbol" aria-roledescription="bar" d="M0,181h150v18h-150Z" fill="#929287"/></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g><g class="mark-group role-scope concat_1_group" role="graphics-object" aria-roledescription="group mark container"><g transform="translate(0,813)"><path class="background" aria-hidden="true" d="M0,0h20v20h-20Z"/><g><g class="mark-text role-mark concat_1_marks" role="graphics-object" aria-roledescription="text mark container"><text aria-label="text: Data is lower bound of estimated pay scale by state.,Excluding data for 4 states that pay no wages for industry labor,and 7 states for which data is unavailable.,Source: ACLU" role="graphics-symbol" aria-roledescription="text mark" text-anchor="start" transform="translate(10,8)" font-family="Verdana" font-size="10px" fill="black"><tspan>Data is lower bound of estimated pay scale by state.</tspan><tspan x="0" dy="12">Excluding data for 4 states that pay no wages for industry labor</tspan><tspan x="0" dy="12">and 7 states for which data is unavailable.</tspan><tspan x="0" dy="12">Source: ACLU</tspan></text></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g></g></svg>        </div>
         </div>
-        <div class="scroll">
-            <p class="body_text">Working one hour on the above inmate wages in each of the above
-                37 states and in a federal prison would earn $13.47, which is less than California's
-                minimum wage of $16.90 for just one hour of labor.</p>
-        </div>
 
-        <div class="scroll">
-            <!--https://calmatters.org/justice/2025/10/prison-firefighter-new-laws/-->
+    </div>
+                <!--https://calmatters.org/justice/2025/10/prison-firefighter-new-laws/-->
             <p class="body_text">This year, legislation passed to pay California's inmate firefighters the federal minimum wage of 
                 $7.25 per hour. That's still less than half of the minimum wage in their own state to combat some of the most 
                 destructive natural disasters in modern US history. 
@@ -256,8 +234,6 @@
                 people eager to work get their resumes thrown in the trash. 
 
             </p>
-        </div>
-    </div>
     <script>
 
     const scrolls = document.querySelectorAll(".scroll");
