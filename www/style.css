@@ -78,3 +78,26 @@
     a { 
       color: inherit; 
     }
+
+    #tall_svg {
+        width: 100%;
+        height: 800px;   
+        display: block; 
+        margin: auto;
+        flex: 1;
+        max-width:55%
+    }
+
+    #split_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;            
+    width: 100%;
+    }
+
+    #left_text {
+        flex: 1;           
+        max-width: 45%;
+    }
