@@ -1,0 +1,26 @@
+{
+  "name": "california-prison-labor-project",
+  "version": "1.0.0",
+  "description": "Ganon Evans",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "check": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganon-evans-capp/louisiana-prison-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ganon-evans-capp/louisiana-prison-project/issues"
+  },
+  "homepage": "https://github.com/ganon-evans-capp/louisiana-prison-project#readme",
+  "devDependencies": {
+    "prettier": "^3.7.4"
+  }
+}

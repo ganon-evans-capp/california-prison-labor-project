@@ -1,10 +1,10 @@
-# Ganon Evans 
+# Ganon Evans
 
 ## Description
 
 About one in one hundred of all of the people in Louisiana are in prison, with over half of them in local facilities. For state facilities, imprisonment is a population shift from urban parts of the state to more rural areas where prisons are located. As a result, states across the country have performed "prison gerrymandering" in which congressional districts for both state and federal office meet their population requirements by counting prisoners who reside there, but are originate from other parts of the state.
 
-I wanted to make an interactive model showing the consequences of the prison population shift in Louisiana and hows it affected population-dependent things like congressional districts and their results, grants and federal funding, and demographics. I have a lot of robust data on prison statistics now by region, but I think the challenge will to try and estimate the unseen counterfactuals of what districts would look like if people were instead in their home locations. 
+I wanted to make an interactive model showing the consequences of the prison population shift in Louisiana and hows it affected population-dependent things like congressional districts and their results, grants and federal funding, and demographics. I have a lot of robust data on prison statistics now by region, but I think the challenge will to try and estimate the unseen counterfactuals of what districts would look like if people were instead in their home locations.
 
 ## Technical Plan re: Option A/B/C/D
 
