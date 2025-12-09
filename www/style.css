@@ -113,3 +113,8 @@ a {
 svg text {
   user-select: none;
 }
+
+ul {
+  text-align: center;
+  list-style-type: none;
+}
